@@ -1,0 +1,1 @@
+// run this when you want to build the project, server.js is for development
