@@ -92,7 +92,7 @@ ejs.renderFile(path.join(__dirname, 'src', 'pages', 'search.ejs'), { articles: g
 // categories
 const categories = ['business', 'entertainment', 'politics', 'sports', 'opinion', 'suburbs', 'weather', 'updates'];
 categories.forEach(category => {
-  ejs.renderFile(path.join(__dirname, 'src', 'pages', 'category.ejs'), {
+  ejs.renderFile(path.join(__dirname, 'src', 'pages', 'index.ejs'), { //trying out replacing categroy with index
     articles: getAllArticles().filter((article) => {
       return article.meta.section.toLowerCase() === category.toLowerCase();
     }), category
