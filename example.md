@@ -5,6 +5,7 @@ author: piemadd
 section: updates
 tags: 
   - updates
+exerpt: Welcome to the Chicago Windy City Herald!
 image:
 imageAlt:
 imageCredit:

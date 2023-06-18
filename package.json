@@ -4,9 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node server.js"
+    "build": "node build.js",
+    "serve": "http-server dist -p 3000"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "gray-matter": "^4.0.3",
+    "http-server": "^14.1.1",
+    "isomorphic-dompurify": "^1.5.0",
+    "marked": "^5.0.2",
+    "marked-mangle": "^1.0.1",
+    "node-fetch": "^2.6.7"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/dist/**"
+    ],
+    "delay": 2500
+  }
 }

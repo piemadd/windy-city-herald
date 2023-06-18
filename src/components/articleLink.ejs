@@ -1,0 +1,13 @@
+<div class="articleLink">
+  <p>
+    <%= article.meta.section %> | <%= new Intl.DateTimeFormat('en-US', {
+    dateStyle: 'medium', timeZone: 'UTC'}).format(article.meta.created) %>
+  </p>
+  <h3>
+    <a href="/articles/<%= article.slug %>"><%= article.meta.title %></a>
+  </h3>
+  <p><%= article.meta.exerpt %></p>
+  <img src="<%= article.meta.image %>" alt="<%= article.meta.title %>" />
+  <p><a href="/articles/<%= article.slug %>">Read More</a></p>
+  <hr />
+</div>

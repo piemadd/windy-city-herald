@@ -1,1 +1,0 @@
-// run this when you want to develop the project, build.js outputs a static site for production

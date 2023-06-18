@@ -19,7 +19,6 @@ At the top of every article is "grey matter," metadata relating to an article. H
 - `created`: The date the article was created
 - `author`: The author of the article (this is the username, author information is stored in `meta/authors/[author].json`)
 - `section`: The section of the article. Possible values:
-  - `breaking`
   - `business`
   - `entertainment`
   - `politics`
@@ -29,7 +28,7 @@ At the top of every article is "grey matter," metadata relating to an article. H
   - `weather`
   - `updates`
 - `tags`: An array of tags for the article. There are no restrictions on what these can be, they just have to be relavent to the article as they are used for SEO and site search functionality.
-- `image`: The image for the article. This is the path to the image, relative to the `public/img/articles` folder. If no image is provided, the default image will be used.
+- `image`: The image for the article. This is the path to the image, relative to the `public/images/articles` folder. If no image is provided, the default image will be used.
 - `imageAlt`: The alt text for the image. This is used for SEO and accessibility.
 - `imageCredit`: The credit for the image.
 
