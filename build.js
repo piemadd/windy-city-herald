@@ -79,7 +79,7 @@ const getAllArticles = () => {
 }
 
 // site index
-ejs.renderFile(path.join(__dirname, 'src', 'pages', 'index.ejs'), { articles: getAllArticles() }, { root: path.join(__dirname, 'src', 'pages') })
+ejs.renderFile(path.join(__dirname, 'src', 'pages', 'index.ejs'), { articles: getAllArticles(), pageTitle: 'Windy City Herald' }, { root: path.join(__dirname, 'src', 'pages') })
   .then((html) => {
     fs.writeFileSync(path.join(__dirname, 'dist', 'index.html'), html);
   });
