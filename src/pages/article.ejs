@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,13 +9,21 @@
   </head>
   <body>
     <%- include('../components/header') %>
-    <hr>
+    <hr />
     <main class="articlePage">
       <section class="articleArea">
         <h1><%= article.meta.title %></h1>
-        <img src="<%= article.meta.image %>" alt="<%= article.meta.imageAlt %>" />
+        <p>Written by <%= article.author.name %></p>
+        <p>
+          <%= article.meta.section %> | <%= new Intl.DateTimeFormat('en-US', {
+          dateStyle: 'medium', timeZone: 'UTC'}).format(article.meta.created) %>
+        </p>
+        <img
+          src="<%= article.meta.image %>"
+          alt="<%= article.meta.imageAlt %>"
+        />
         <p class="imgCredit"><i><%= article.meta.imageCredit %></i></p>
-        <hr>
+        <hr />
         <div class="article"><%- article.html %></div>
       </section>
     </main>

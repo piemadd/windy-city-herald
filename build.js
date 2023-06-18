@@ -27,7 +27,9 @@ const getSingleArticle = (file) => {
   const fileHtml = marked.parse(fileMatter.content, {
     headerIds: false,
   });
-  const cleanedHtml = DOMPurify.sanitize(fileHtml);
+  //const cleanedHtml = DOMPurify.sanitize(fileHtml);
+  //i'll just manually review shit ig
+  const cleanedHtml = fileHtml;
 
   fileMatter.data.title = titleCase(fileMatter.data.title);
   fileMatter.data.section = titleCase(fileMatter.data.section);
@@ -105,6 +107,7 @@ categories.forEach(category => {
 
 // articles
 getAllArticles().forEach(article => {
+  //console.log(article)
   ejs.renderFile(path.join(__dirname, 'src', 'pages', 'article.ejs'), { article }, { root: path.join(__dirname, 'src', 'pages') })
     .then((html) => {
       fs.mkdirSync(path.join(__dirname, 'dist', 'articles', article.slug), { recursive: true });
