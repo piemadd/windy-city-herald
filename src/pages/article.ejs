@@ -5,13 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/style.css" />
-    
+
     <!-- HTML Meta Tags -->
     <title><%= article.meta.title %> | Windy City Herald</title>
-    <meta
-      name="description"
-      content="<%= article.meta.exerpt %>"
-    />
+    <meta name="description" content="<%= article.meta.exerpt %>" />
 
     <!-- Facebook Meta Tags -->
     <meta
@@ -23,11 +20,11 @@
       property="og:title"
       content="<%= article.meta.title %> | Windy City Herald"
     />
+    <meta property="og:description" content="<%= article.meta.exerpt %>" />
     <meta
-      property="og:description"
-      content="<%= article.meta.exerpt %>"
+      property="og:image"
+      content="https://windycityherald.com/<%= article.meta.image %>"
     />
-    <meta property="og:image" content="https://windycityherald.com/<%= article.meta.image %>" />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -40,13 +37,28 @@
       name="twitter:title"
       content="<%= article.meta.title %> | Windy City Herald"
     />
+    <meta name="twitter:description" content="<%= article.meta.exerpt %>" />
     <meta
-      name="twitter:description"
-      content="<%= article.meta.exerpt %>"
+      name="twitter:image"
+      content="https://windycityherald.com/<%= article.meta.image %>"
     />
-    <meta name="twitter:image" content="https://windycityherald.com/<%= article.meta.image %>" />
 
     <!-- Meta Tags Generated via https://www.opengraph.xyz -->
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-DJRSWR49S3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-DJRSWR49S3");
+    </script>
   </head>
   <body>
     <%- include('../components/header') %>

@@ -97,7 +97,7 @@ categories.forEach(category => {
   ejs.renderFile(path.join(__dirname, 'src', 'pages', 'index.ejs'), { //trying out replacing categroy with index
     articles: getAllArticles().filter((article) => {
       return article.meta.section.toLowerCase() === category.toLowerCase();
-    }), category
+    }), category, pageTitle: `${titleCase(category)} | Windy City Herald`
   }, { root: path.join(__dirname, 'src', 'pages') })
     .then((html) => {
       fs.mkdirSync(path.join(__dirname, 'dist', 'categories', category), { recursive: true });

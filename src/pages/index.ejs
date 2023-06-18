@@ -5,7 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/style.css" />
-    <title>Windy City Herald</title>
+    <title><%- pageTitle ? pageTitle : "Windy City Herald" %></title>
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-DJRSWR49S3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-DJRSWR49S3");
+    </script>
   </head>
   <body>
     <%- include('../components/header') %>
@@ -16,7 +31,7 @@
         include('../components/articleLink', {article: article}) %> <% }) %>
       </section>
       <p style="text-align: center">
-        No more articles :/<br /><a href="#top">Scroll to Top</a>
+        No more articles :/<br /><a href="#">Scroll to Top</a>
       </p>
     </main>
   </body>
