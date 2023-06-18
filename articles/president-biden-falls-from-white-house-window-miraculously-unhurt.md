@@ -1,7 +1,7 @@
 ---
 title: President Biden Falls from White House Window, Miraculously Unhurt
 created: 2023-06-18
-author: Stefan Mannheim
+author: stefan
 section: politics
 tags:
   - biden
