@@ -8,7 +8,7 @@ tags:
   - white house
   - nation
 exerpt: The president will continue to fulfill his duties despite his most recent tumble
-image: 
+image: bidentumble.png
 imageAlt: President Joe Biden gives a press conference with a gnarly gash in his face and head bandages
 imageCredit: Stefan P. Mannheim/Windy City Herald
 ---
