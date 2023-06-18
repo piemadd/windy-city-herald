@@ -3,13 +3,13 @@
 This is the source code for the Windy City Herald, a satirical newspaper based
 out of Chicago. It uses ejs to render the pages from an express server during development and generates a static site for production. I could have used something like Next, Gatsby, or Vite to pull this off, but for this project I wanted to return to my roots of Node + ejs.
 
-## Development
-
-To develop, run `npm run dev` and navigate to `localhost:3000`.
-
 ## Production
 
 To generate the static site, run `npm run build`. The static site will be generated in the `dist` folder.
+
+## Development
+
+I scrapped the proper dev server. Just like rerun `npm run build` after every change to check ur work ig. `npm run serve` will serve the exported site at port `3000`
 
 ## Grey Matter
 
