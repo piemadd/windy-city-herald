@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css?t=<%= buildTime %>" />
 
     <!-- HTML Meta Tags -->
     <title><%= article.meta.title %> | Windy City Herald</title>
@@ -66,7 +66,12 @@
     <main class="articlePage">
       <section class="articleArea">
         <h1><%= article.meta.title %></h1>
-        <p>Written by <a href="/authors/<%= article.author.slug %>"><%= article.author.name %></a></p>
+        <p>
+          Written by
+          <a href="/authors/<%= article.author.slug %>"
+            ><%= article.author.name %></a
+          >
+        </p>
         <p>
           <%= article.meta.section %> | <%= new Intl.DateTimeFormat('en-US', {
           dateStyle: 'medium', timeZone: 'UTC'}).format(article.meta.created) %>

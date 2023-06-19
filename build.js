@@ -93,16 +93,16 @@ const getAllArticles = () => {
   return articles;
 }
 
-const allAuthorData = getAllAuthors();
+const buildTime = Date.now();
 
 // site index
-ejs.renderFile(path.join(__dirname, 'src', 'pages', 'index.ejs'), { articles: getAllArticles(), pageTitle: 'Windy City Herald' }, { root: path.join(__dirname, 'src', 'pages') })
+ejs.renderFile(path.join(__dirname, 'src', 'pages', 'index.ejs'), { articles: getAllArticles(), pageTitle: 'Windy City Herald', buildTime }, { root: path.join(__dirname, 'src', 'pages') })
   .then((html) => {
     fs.writeFileSync(path.join(__dirname, 'dist', 'index.html'), html);
   });
 
 // site search
-ejs.renderFile(path.join(__dirname, 'src', 'pages', 'search.ejs'), { articles: getAllArticles() }, { root: path.join(__dirname, 'src', 'pages') })
+ejs.renderFile(path.join(__dirname, 'src', 'pages', 'search.ejs'), { articles: getAllArticles(), buildTime }, { root: path.join(__dirname, 'src', 'pages') })
   .then((html) => {
     fs.mkdirSync(path.join(__dirname, 'dist', 'search'), { recursive: true });
     fs.writeFileSync(path.join(__dirname, 'dist', 'search', 'index.html'), html);
@@ -111,10 +111,11 @@ ejs.renderFile(path.join(__dirname, 'src', 'pages', 'search.ejs'), { articles: g
 // categories
 const categories = ['business', 'entertainment', 'politics', 'sports', 'opinion', 'suburbs', 'weather', 'updates'];
 categories.forEach(category => {
-  ejs.renderFile(path.join(__dirname, 'src', 'pages', 'index.ejs'), { //trying out replacing categroy with index
+  ejs.renderFile(path.join(__dirname, 'src', 'pages', 'index.ejs'), {
     articles: getAllArticles().filter((article) => {
       return article.meta.section.toLowerCase() === category.toLowerCase();
-    }), category, pageTitle: `${titleCase(category)} | Windy City Herald`
+    }), category, pageTitle: `${titleCase(category)} | Windy City Herald`,
+    buildTime
   }, { root: path.join(__dirname, 'src', 'pages') })
     .then((html) => {
       fs.mkdirSync(path.join(__dirname, 'dist', 'categories', category), { recursive: true });
@@ -125,7 +126,7 @@ categories.forEach(category => {
 // articles
 getAllArticles().forEach(article => {
   ejs.renderFile(path.join(__dirname, 'src', 'pages', 'article.ejs'), {
-    article, author: article.author
+    article, author: article.author, buildTime
   }, { root: path.join(__dirname, 'src', 'pages') })
     .then((html) => {
       fs.mkdirSync(path.join(__dirname, 'dist', 'articles', article.slug), { recursive: true });
@@ -143,7 +144,7 @@ authors.forEach(author => {
       getAllArticles().filter((article) => {
         return article.meta.author.toLowerCase() === author.split('.')[0].toLowerCase();
       }),
-    pageTitle: `Author ${authorData.name} | Windy City Herald`
+    pageTitle: `Author ${authorData.name} | Windy City Herald`, buildTime
   }, { root: path.join(__dirname, 'src', 'pages') })
     .then((html) => {
       fs.mkdirSync(path.join(__dirname, 'dist', 'authors', author.replace('.json', '')), { recursive: true });
