@@ -60,6 +60,28 @@ section.articles {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
+section.authorAbout {
+  width:  100%;
+  max-width: 800px;
+  display: flex;
+}
+
+section.authorAbout div.authorImage {
+  height: 128px;
+}
+
+section.authorAbout div.authorImage img {
+  height: 100%;
+  border-radius: 100%;
+}
+
+section.authorAbout div.authorText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 16px;
+}
+
 div.articleLink {
   display: flex;
   flex-direction: column;

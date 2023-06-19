@@ -1,5 +1,6 @@
 {
   "name": "The Windy City Herald Staff",
+  "slug": "default",
   "socials": {
     "github": null,
     "twitter": null,
@@ -10,6 +11,6 @@
     "website": null
   },
   "tagline": "what the dog doin",
-  "image": "default.jpg",
+  "image": "default.png",
   "background": null
 }

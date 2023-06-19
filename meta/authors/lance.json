@@ -1,5 +1,6 @@
 {
   "name": "Lance",
+  "slug": "lance",
   "socials": {
     "github": null,
     "twitter": null,
@@ -7,9 +8,9 @@
     "instagram": null,
     "tikok": null,
     "email": null,
-    "website": null
+    "website": "https://windycityherald.com/"
   },
   "tagline": "truck",
-  "image": "default.jpg",
+  "image": "default.png",
   "background": null
 }

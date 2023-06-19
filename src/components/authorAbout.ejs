@@ -1,0 +1,49 @@
+<hr />
+<section class="authorAbout">
+  <div class="authorImage">
+    <img
+      src="/images/authors/<%= author.image %>"
+      alt="Image of <%= author.name %>"
+    />
+  </div>
+  <div class="authorText">
+    <h1><a href="/authors/<%= author.slug %>"><%= author.name %></a></h1>
+    <p><i><%= author.tagline %></i></p>
+    <p>
+      <b><i>Connect</i></b>
+    </p>
+    <p>
+      <% if (author.socials.github !== null) { %>
+      <a href="https://github.com/<%= author.socials.github %>" target="_blank"
+        >Github</a
+      >
+      <% } %> <% if (author.socials.twitter !== null) { %>
+      <a
+        href="https://twitter.com/<%= author.socials.twitter %>"
+        target="_blank"
+        >Twitter</a
+      >
+      <% } %> <% if (author.socials.linkedin !== null) { %>
+      <a
+        href="https://linkedin.com/in/<%= author.socials.linkedin %>"
+        target="_blank"
+        >LinkedIn</a
+      >
+      <% } %> <% if (author.socials.instagram !== null) { %>
+      <a
+        href="https://instagram.com/<%= author.socials.instagram %>"
+        target="_blank"
+        >Instagram</a
+      >
+      <% } %> <% if (author.socials.tikok !== null) { %>
+      <a href="https://tiktok.com/@<%= author.socials.tikok %>" target="_blank"
+        >Tiktok</a
+      >
+      <% } %> <% if (author.socials.email !== null) { %>
+      <a href="mailto:<%= author.socials.email %>" target="_blank">Email</a>
+      <% } %> <% if (author.socials.website !== null) { %>
+      <a href="<%= author.socials.website %>" target="_blank">Website</a>
+      <% } %>
+    </p>
+  </div>
+</section>

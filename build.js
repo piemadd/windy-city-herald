@@ -19,6 +19,21 @@ const getAuthor = (username) => {
   return author;
 };
 
+const getAllAuthors = () => {
+  const authorFiles = fs.readdirSync(path.join(__dirname, 'meta', 'authors'));
+  const authors = authorFiles.map(file => {
+    return getAuthor(file.replace('.json', ''));
+  });
+
+  let finalAuthors = {};
+
+  authors.forEach(author => {
+    finalAuthors[author.username] = author;
+  });
+
+  return finalAuthors;
+};
+
 const getSingleArticle = (file) => {
   console.log("Reading file:", file)
   const filePath = path.join(__dirname, 'articles', file);
@@ -78,6 +93,8 @@ const getAllArticles = () => {
   return articles;
 }
 
+const allAuthorData = getAllAuthors();
+
 // site index
 ejs.renderFile(path.join(__dirname, 'src', 'pages', 'index.ejs'), { articles: getAllArticles(), pageTitle: 'Windy City Herald' }, { root: path.join(__dirname, 'src', 'pages') })
   .then((html) => {
@@ -107,11 +124,30 @@ categories.forEach(category => {
 
 // articles
 getAllArticles().forEach(article => {
-  //console.log(article)
-  ejs.renderFile(path.join(__dirname, 'src', 'pages', 'article.ejs'), { article }, { root: path.join(__dirname, 'src', 'pages') })
+  ejs.renderFile(path.join(__dirname, 'src', 'pages', 'article.ejs'), {
+    article, author: article.author
+  }, { root: path.join(__dirname, 'src', 'pages') })
     .then((html) => {
       fs.mkdirSync(path.join(__dirname, 'dist', 'articles', article.slug), { recursive: true });
       fs.writeFileSync(path.join(__dirname, 'dist', 'articles', article.slug, 'index.html'), html);
+    });
+});
+
+// authors
+const authors = fs.readdirSync(path.join(__dirname, 'meta', 'authors'));
+authors.forEach(author => {
+  const authorData = JSON.parse(fs.readFileSync(path.join(__dirname, 'meta', 'authors', author), 'utf-8'));
+  ejs.renderFile(path.join(__dirname, 'src', 'pages', 'author.ejs'), {
+    author: authorData,
+    articles:
+      getAllArticles().filter((article) => {
+        return article.meta.author.toLowerCase() === author.split('.')[0].toLowerCase();
+      }),
+    pageTitle: `Author ${authorData.name} | Windy City Herald`
+  }, { root: path.join(__dirname, 'src', 'pages') })
+    .then((html) => {
+      fs.mkdirSync(path.join(__dirname, 'dist', 'authors', author.replace('.json', '')), { recursive: true });
+      fs.writeFileSync(path.join(__dirname, 'dist', 'authors', author.replace('.json', ''), 'index.html'), html);
     });
 });
 

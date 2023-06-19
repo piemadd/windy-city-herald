@@ -66,19 +66,22 @@
     <main class="articlePage">
       <section class="articleArea">
         <h1><%= article.meta.title %></h1>
-        <p>Written by <%= article.author.name %></p>
+        <p>Written by <a href="/authors/<%= article.author.slug %>"><%= article.author.name %></a></p>
         <p>
           <%= article.meta.section %> | <%= new Intl.DateTimeFormat('en-US', {
           dateStyle: 'medium', timeZone: 'UTC'}).format(article.meta.created) %>
         </p>
         <img
-          src="https://windycityherald.com/<%= article.meta.image %>"
+          src="/<%= article.meta.image %>"
           alt="<%= article.meta.imageAlt %>"
         />
         <p class="imgCredit"><i><%= article.meta.imageCredit %></i></p>
         <hr />
         <div class="article"><%- article.html %></div>
       </section>
+      <%- include('../components/authorAbout') %>
+      <hr />
+      <%- include('../components/footer') %>
     </main>
   </body>
 </html>

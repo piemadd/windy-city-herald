@@ -45,6 +45,7 @@ ensures that the boxes will only require maintenance every few hours.
 <br />
 
 ![A tall green box, like those currently used for cannabis amnesty, but "Piss Amnesty" is written on the front instead of "Cannabis Amnesty"](https://windycityherald.com/images/articles/piss-amnesty/full.png)
+*Piero Maddaleni/Windy City Herald*
 
 <br />
 
