@@ -36,7 +36,7 @@ const getSingleArticle = (file) => {
   fileMatter.data.tags = fileMatter.data.tags.map(tag => titleCase(tag));
 
   if (fileMatter.data.image == '' || fileMatter.data.image == null) {
-    fileMatter.data.image = "/images/articles/default/cover.jpg";
+    fileMatter.data.image = "images/articles/default/cover.jpg";
     fileMatter.data.imageAlt = "The Sears tower during a sunset";
     fileMatter.data.imageCredit = "Photo by Piero Maddaleni"
   }
