@@ -22,7 +22,7 @@ imageAlt:
 imageCredit: Piero Maddaleni/Windy City Herald
 ---
 
-**[CHICAGO, IL]** In the early afternoon on June 19th, Mayor Brandon Johnson
+**[CHICAGO, IL]** In the early afternoon of June 19th, Mayor Brandon Johnson
 unveiled a new urine amnesty box at terminal 2 in Chicago O'hare airport. This
 innovative measure comes in response to several occurrences of passengers
 inadvertently leaving bags containing urine in their luggage. Additionally, the
@@ -32,7 +32,7 @@ locations within O'Hare (ORD) and Midway (MDW) airports in the upcoming weeks.
 <br />
 
 &nbsp;&nbsp;&nbsp;&nbsp;Recognizing the significance of this initiative, other
-major cities, including Atlanta, New York, Los Angeles, and **_especially_**
+major cities, such as Atlanta, New York, Los Angeles, and **_especially_**
 Paris, have also expressed their intentions to implement similar urine amnesty
 boxes at their respective airports. These specialized containers bear a
 distinctive green color and prominently feature the label "Piss Amnesty" on
