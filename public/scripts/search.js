@@ -2,11 +2,13 @@ const searchBox = document.getElementById('search');
 const articlesHolder = document.getElementsByClassName('articles')[0];
 const existingArticles = Array.from(articlesHolder.children).map((article) => article.cloneNode(true));
 
-const debounce = ((func, timeout = 100) => {
+let globalDebounceTimout = 2;
+
+const debounce = ((func) => {
   let timer;
   return (...args) => {
     clearTimeout(timer);
-    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    timer = setTimeout(() => { func.apply(this, args); }, globalDebounceTimout);
   };
 });
 
@@ -26,6 +28,7 @@ const fuse = new Fuse(articles, searchOptions);
 
 function processSearch() {
 
+  const initial = Date.now();
   const searchResults = searchBox.value == '' ? articles.map((article, i) => {
     return {
       item: article,
@@ -34,6 +37,11 @@ function processSearch() {
   }) : fuse.search(searchBox.value);
   console.log(searchResults);
   console.log(existingArticles)
+
+  const searchTotalTime = Date.now() - initial;
+  globalDebounceTimout = searchTotalTime * 2;
+
+  console.log('Search took', searchTotalTime, 'ms');
 
   const newArticles = document.createDocumentFragment();
 
