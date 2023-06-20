@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/style.css?t=<%= buildTime %>" />
-    <title>Search | Windy City Herald</title>
+    <title><%= pageTitle %></title>
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -21,17 +21,21 @@
 
       gtag("config", "G-DJRSWR49S3");
     </script>
+    <script src="/data/articles.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   </head>
   <body>
     <%- include('../components/header') %>
     <main>
       <hr />
-      <div>
-        <p style="text-align: center">
-          HAIIIIII :3<br />(the search functionality is currently under
-          construction)
-        </p>
-      </div>
+      <input type="text" id="search" name="search" placeholder="Search..." />
+      <hr />
+      <section class="articles">
+        <% articles.forEach((article) => { %> <%-
+        include('../components/articleLink', {article: article}) %> <% }) %>
+      </section>
+      <%- include('../components/footer') %>
     </main>
+    <script src="/scripts/search.js"></script>
   </body>
 </html>

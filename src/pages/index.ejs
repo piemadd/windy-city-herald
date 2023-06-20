@@ -21,10 +21,14 @@
 
       gtag("config", "G-DJRSWR49S3");
     </script>
+    <script src="/data/articles.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   </head>
   <body>
     <%- include('../components/header') %>
     <main>
+      <hr />
+      <input type="text" id="search" name="search" placeholder="Type to Search" />
       <hr />
       <section class="articles">
         <% articles.forEach((article) => { %> <%-
@@ -32,5 +36,6 @@
       </section>
       <%- include('../components/footer') %>
     </main>
+    <script src="/scripts/search.js"></script>
   </body>
 </html>

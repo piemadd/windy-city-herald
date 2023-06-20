@@ -101,13 +101,6 @@ ejs.renderFile(path.join(__dirname, 'src', 'pages', 'index.ejs'), { articles: ge
     fs.writeFileSync(path.join(__dirname, 'dist', 'index.html'), html);
   });
 
-// site search
-ejs.renderFile(path.join(__dirname, 'src', 'pages', 'search.ejs'), { articles: getAllArticles(), buildTime }, { root: path.join(__dirname, 'src', 'pages') })
-  .then((html) => {
-    fs.mkdirSync(path.join(__dirname, 'dist', 'search'), { recursive: true });
-    fs.writeFileSync(path.join(__dirname, 'dist', 'search', 'index.html'), html);
-  });
-
 // categories
 const categories = ['business', 'entertainment', 'politics', 'sports', 'opinion', 'suburbs', 'weather', 'updates'];
 categories.forEach(category => {
@@ -154,3 +147,10 @@ authors.forEach(author => {
 
 // copying static files
 fs.cpSync(path.join(__dirname, 'public'), path.join(__dirname, 'dist'), { recursive: true });
+
+// json file with all article metadata
+fs.mkdirSync(path.join(__dirname, 'dist', 'data'), { recursive: true });
+fs.writeFileSync(path.join(__dirname, 'dist', 'data', 'articles.js'), `const articles = ${JSON.stringify(getAllArticles().map((article) => {
+  delete article.html;
+  return article;
+}))}`);
