@@ -7,8 +7,8 @@ tags:
   - rail
   - accident
 exerpt: The railfan community stands united in grief, mourning the loss of precious lives and lamenting the damage inflicted upon a historical masterpiece.
-image:
-imageAlt:
+image: images/articles/paderailment/IMG_1184.jpeg
+imageAlt: A railroad roundtable full with locomotives on a clear sunny day.
 imageCredit:
 ---
 
