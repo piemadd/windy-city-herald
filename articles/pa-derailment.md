@@ -1,13 +1,15 @@
 ---
 title: Newly Restored Virginian Locomotive NS1069 Derails in Pennsylvania Town!
-created: 2023-05-21
+created: 2023-06-27
 author: danni
-section: updates
+section: entertainment
 tags:
   - rail
   - accident
+  - norfolk southern
+  - penis
 exerpt: The railfan community stands united in grief, mourning the loss of precious lives and lamenting the damage inflicted upon a historical masterpiece.
-image: images/articles/paderailment/IMG_1184.jpeg
+image: images/articles/pa-derailment/cover.jpeg
 imageAlt: A railroad roundtable full with locomotives on a clear sunny day.
 imageCredit:
 ---
