@@ -80,7 +80,11 @@
           src="/<%= article.meta.image %>"
           alt="<%= article.meta.imageAlt %>"
         />
-        <p class="imgCredit"><i><%= article.meta.imageCredit %></i></p>
+        <p class="imgCredit">
+          <i><%= article.meta.imageCredit %></i>
+          <br />
+          <i><%= article.meta.imageAlt %></i>
+        </p>
         <hr />
         <div class="article"><%- article.html %></div>
       </section>
