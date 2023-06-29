@@ -10,7 +10,7 @@ tags:
   - smoke
   - canada
 exerpt:
-  'Justin Trudeau is "very sorry," "wont''t do it again," and "is just a quirked
+  'Justin Trudeau is "very sorry," "won''t do it again," and "is just a quirked
   up white boy with a little bit of swag."'
 image: images/articles/hotbox/cover.png
 imageAlt: Justin Trudeau addressing the Canadian people
