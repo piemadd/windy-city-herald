@@ -11,7 +11,7 @@ tags:
 exerpt: The railfan community stands united in grief, mourning the loss of precious lives and lamenting the damage inflicted upon a historical masterpiece.
 image: images/articles/pa-derailment/cover.jpeg
 imageAlt: A railroad roundtable full with locomotives on a clear sunny day.
-imageCredit:
+imageCredit: we stole the image lmao
 ---
 
 As a dedicated railfan and lover of all things trains, I find myself utterly devastated by the recent tragic news that has sent shockwaves through the rail enthusiast community. The newly restored Virginian locomotive NS1069, fresh from the Altoona shops in Pennsylvania, derailed in a lesser-known Pennsylvania town, resulting in a devastating loss of life. This incident not only breaks our hearts as railfans but also raises significant concerns about safety and the preservation of our treasured locomotives. It is with a heavy heart that I express my deepest sympathies to the victims and their families during this incredibly difficult time.
