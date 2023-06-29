@@ -1,6 +1,6 @@
 ---
 title:
-  Canadian Prime Minister Justin Trudeau Formally Apologizes for Hot Boxing the
+  Canadian PM Justin Trudeau Apologizes for Hot Boxing the
   Midwest
 created: 2023-06-28
 author: piemadd
