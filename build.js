@@ -60,6 +60,7 @@ const getSingleArticle = (file) => {
     fileMatter.data.author = "default";
   };
 
+  console.log("Returning article:", file)
   return {
     meta: fileMatter.data,
     html: cleanedHtml,

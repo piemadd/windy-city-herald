@@ -81,7 +81,9 @@
           alt="<%= article.meta.imageAlt %>"
         />
         <p class="imgCredit">
+          <%- article.meta.imageCreditLink ? `<a href="${article.meta.imageCreditLink}" target="_blank">` : '' %>
           <i><%= article.meta.imageCredit %></i>
+          <%- article.meta.imageCreditLink ? '</a>' : '' %>
           <br />
           <i><%= article.meta.imageAlt %></i>
         </p>
