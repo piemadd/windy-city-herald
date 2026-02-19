@@ -1,33 +1,41 @@
-const fs = require('fs');
-const path = require('path');
-const matter = require('gray-matter');
-const marked = require('marked');
-const { mangle } = require('marked-mangle')
-const DOMPurify = require('isomorphic-dompurify');
-const ejs = require('ejs');
+const fs = require("fs");
+const path = require("path");
+const matter = require("gray-matter");
+const marked = require("marked");
+const { mangle } = require("marked-mangle");
+const DOMPurify = require("isomorphic-dompurify");
+const ejs = require("ejs");
 
 marked.use(mangle());
 
 const titleCase = (str) => {
-  return str.split(' ').map(function (word) {
-    return word.replace(word[0], word[0].toUpperCase());
-  }).join(' ');
+  return str
+    .split(" ")
+    .map(function (word) {
+      return word.replace(word[0], word[0].toUpperCase());
+    })
+    .join(" ");
 };
 
 const getAuthor = (username) => {
-  const author = JSON.parse(fs.readFileSync(path.join(__dirname, 'meta', 'authors', `${username}.json`), 'utf-8'));
+  const author = JSON.parse(
+    fs.readFileSync(
+      path.join(__dirname, "meta", "authors", `${username}.json`),
+      "utf-8",
+    ),
+  );
   return author;
 };
 
 const getAllAuthors = () => {
-  const authorFiles = fs.readdirSync(path.join(__dirname, 'meta', 'authors'));
-  const authors = authorFiles.map(file => {
-    return getAuthor(file.replace('.json', ''));
+  const authorFiles = fs.readdirSync(path.join(__dirname, "meta", "authors"));
+  const authors = authorFiles.map((file) => {
+    return getAuthor(file.replace(".json", ""));
   });
 
   let finalAuthors = {};
 
-  authors.forEach(author => {
+  authors.forEach((author) => {
     finalAuthors[author.username] = author;
   });
 
@@ -35,9 +43,9 @@ const getAllAuthors = () => {
 };
 
 const getSingleArticle = (file) => {
-  console.log("Reading file:", file)
-  const filePath = path.join(__dirname, 'articles', file);
-  const fileContent = fs.readFileSync(filePath, 'utf-8');
+  console.log("Reading file:", file);
+  const filePath = path.join(__dirname, "articles", file);
+  const fileContent = fs.readFileSync(filePath, "utf-8");
   const fileMatter = matter(fileContent);
   const fileHtml = marked.parse(fileMatter.content, {
     headerIds: false,
@@ -48,110 +56,222 @@ const getSingleArticle = (file) => {
 
   fileMatter.data.title = titleCase(fileMatter.data.title);
   fileMatter.data.section = titleCase(fileMatter.data.section);
-  fileMatter.data.tags = fileMatter.data.tags.map(tag => titleCase(tag));
+  fileMatter.data.tags = fileMatter.data.tags.map((tag) => titleCase(tag));
 
-  if (fileMatter.data.image == '' || fileMatter.data.image == null) {
+  if (fileMatter.data.image == "" || fileMatter.data.image == null) {
     fileMatter.data.image = "images/articles/default/cover.jpg";
     fileMatter.data.imageAlt = "The Sears tower during a sunset";
-    fileMatter.data.imageCredit = "Photo by Piero Maddaleni"
+    fileMatter.data.imageCredit = "Photo by Piero Maddaleni";
   }
 
-  if (fileMatter.data.author == '' || fileMatter.data.author == null) {
+  if (fileMatter.data.author == "" || fileMatter.data.author == null) {
     fileMatter.data.author = "default";
-  };
+  }
 
-  console.log("Returning article:", file)
+  console.log("Returning article:", file);
   return {
     meta: fileMatter.data,
     html: cleanedHtml,
-    slug: file.replace('.md', ''),
+    slug: file.replace(".md", ""),
     author: getAuthor(fileMatter.data.author),
-  }
-}
+  };
+};
 
 //remove old dist if it exists
-if (fs.existsSync(path.join(__dirname, 'dist'))) {
-  fs.rmSync(path.join(__dirname, 'dist'), { recursive: true });
+if (fs.existsSync(path.join(__dirname, "dist"))) {
+  fs.rmSync(path.join(__dirname, "dist"), { recursive: true });
 }
 
 //create new dist
-fs.mkdirSync(path.join(__dirname, 'dist'));
+fs.mkdirSync(path.join(__dirname, "dist"));
+
+//sitemap file
+const sitemapStream = fs.createWriteStream(
+  path.join(__dirname, "dist", "sitemap.xml"),
+  { encoding: "utf8" },
+);
+sitemapStream.write(
+  '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n',
+);
 
 const getAllArticles = () => {
-  const articleFiles = fs.readdirSync(path.join(__dirname, 'articles'));
-  const articles = articleFiles.map(file => {
-    return getSingleArticle(file);
-  }).filter(article => {
-    if (article.meta.created !== null && article.meta.created !== '') {
-      return true;
-    }
+  const articleFiles = fs.readdirSync(path.join(__dirname, "articles"));
+  const articles = articleFiles
+    .map((file) => {
+      return getSingleArticle(file);
+    })
+    .filter((article) => {
+      if (article.meta.created !== null && article.meta.created !== "") {
+        return true;
+      }
 
-    return false;
-  }).sort((a, b) => {
-    return new Date(b.meta.created) - new Date(a.meta.created);
-  });
+      return false;
+    })
+    .sort((a, b) => {
+      return new Date(b.meta.created) - new Date(a.meta.created);
+    });
 
   return articles;
-}
+};
 
 const buildTime = Date.now();
+const buildDateString = new Date(buildTime).toISOString().split("T")[0];
 
 // site index
-ejs.renderFile(path.join(__dirname, 'src', 'pages', 'index.ejs'), { articles: getAllArticles(), pageTitle: 'Windy City Herald', buildTime }, { root: path.join(__dirname, 'src', 'pages') })
+ejs
+  .renderFile(
+    path.join(__dirname, "src", "pages", "index.ejs"),
+    { articles: getAllArticles(), pageTitle: "Windy City Herald", buildTime },
+    { root: path.join(__dirname, "src", "pages") },
+  )
   .then((html) => {
-    fs.writeFileSync(path.join(__dirname, 'dist', 'index.html'), html);
+    fs.writeFileSync(path.join(__dirname, "dist", "index.html"), html);
   });
+sitemapStream.write(
+  `  <url>
+    <loc>https://windycityherald.com/</loc>
+    <lastmod>${buildDateString}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>\n`,
+);
 
 // categories
-const categories = ['business', 'entertainment', 'politics', 'sports', 'opinion', 'suburbs', 'weather', 'updates'];
-categories.forEach(category => {
-  ejs.renderFile(path.join(__dirname, 'src', 'pages', 'index.ejs'), {
-    articles: getAllArticles().filter((article) => {
-      return article.meta.section.toLowerCase() === category.toLowerCase();
-    }), category, pageTitle: `${titleCase(category)} | Windy City Herald`,
-    buildTime
-  }, { root: path.join(__dirname, 'src', 'pages') })
+const categories = [
+  "business",
+  "entertainment",
+  "politics",
+  "sports",
+  "opinion",
+  "suburbs",
+  "weather",
+  "updates",
+];
+categories.forEach((category) => {
+  ejs
+    .renderFile(
+      path.join(__dirname, "src", "pages", "index.ejs"),
+      {
+        articles: getAllArticles().filter((article) => {
+          return article.meta.section.toLowerCase() === category.toLowerCase();
+        }),
+        category,
+        pageTitle: `${titleCase(category)} | Windy City Herald`,
+        buildTime,
+      },
+      { root: path.join(__dirname, "src", "pages") },
+    )
     .then((html) => {
-      fs.mkdirSync(path.join(__dirname, 'dist', 'categories', category), { recursive: true });
-      fs.writeFileSync(path.join(__dirname, 'dist', 'categories', category, 'index.html'), html);
+      fs.mkdirSync(path.join(__dirname, "dist", "categories", category), {
+        recursive: true,
+      });
+      fs.writeFileSync(
+        path.join(__dirname, "dist", "categories", category, "index.html"),
+        html,
+      );
+      sitemapStream.write(
+        `  <url>
+    <loc>https://windycityherald.com/categories/${category}</loc>
+    <lastmod>${buildDateString}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>\n`,
+      );
     });
 });
 
 // articles
-getAllArticles().forEach(article => {
-  ejs.renderFile(path.join(__dirname, 'src', 'pages', 'article.ejs'), {
-    article, author: article.author, buildTime
-  }, { root: path.join(__dirname, 'src', 'pages') })
+getAllArticles().forEach((article) => {
+  ejs
+    .renderFile(
+      path.join(__dirname, "src", "pages", "article.ejs"),
+      {
+        article,
+        author: article.author,
+        buildTime,
+      },
+      { root: path.join(__dirname, "src", "pages") },
+    )
     .then((html) => {
-      fs.mkdirSync(path.join(__dirname, 'dist', 'articles', article.slug), { recursive: true });
-      fs.writeFileSync(path.join(__dirname, 'dist', 'articles', article.slug, 'index.html'), html);
+      fs.mkdirSync(path.join(__dirname, "dist", "articles", article.slug), {
+        recursive: true,
+      });
+      fs.writeFileSync(
+        path.join(__dirname, "dist", "articles", article.slug, "index.html"),
+        html,
+      );
+      sitemapStream.write(
+        `  <url>
+    <loc>https://windycityherald.com/articles/${article.slug}</loc>
+    <lastmod>${buildDateString}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>\n`,
+      );
     });
 });
 
 // authors
-const authors = fs.readdirSync(path.join(__dirname, 'meta', 'authors'));
-authors.forEach(author => {
-  const authorData = JSON.parse(fs.readFileSync(path.join(__dirname, 'meta', 'authors', author), 'utf-8'));
-  ejs.renderFile(path.join(__dirname, 'src', 'pages', 'author.ejs'), {
-    author: authorData,
-    articles:
-      getAllArticles().filter((article) => {
-        return article.meta.author.toLowerCase() === author.split('.')[0].toLowerCase();
-      }),
-    pageTitle: `Author ${authorData.name} | Windy City Herald`, buildTime
-  }, { root: path.join(__dirname, 'src', 'pages') })
+const authors = fs.readdirSync(path.join(__dirname, "meta", "authors"));
+authors.forEach((author) => {
+  const authorData = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "meta", "authors", author), "utf-8"),
+  );
+  ejs
+    .renderFile(
+      path.join(__dirname, "src", "pages", "author.ejs"),
+      {
+        author: authorData,
+        articles: getAllArticles().filter((article) => {
+          return (
+            article.meta.author.toLowerCase() ===
+            author.split(".")[0].toLowerCase()
+          );
+        }),
+        pageTitle: `Author ${authorData.name} | Windy City Herald`,
+        buildTime,
+      },
+      { root: path.join(__dirname, "src", "pages") },
+    )
     .then((html) => {
-      fs.mkdirSync(path.join(__dirname, 'dist', 'authors', author.replace('.json', '')), { recursive: true });
-      fs.writeFileSync(path.join(__dirname, 'dist', 'authors', author.replace('.json', ''), 'index.html'), html);
+      fs.mkdirSync(
+        path.join(__dirname, "dist", "authors", author.replace(".json", "")),
+        { recursive: true },
+      );
+      fs.writeFileSync(
+        path.join(
+          __dirname,
+          "dist",
+          "authors",
+          author.replace(".json", ""),
+          "index.html",
+        ),
+        html,
+      );
+      sitemapStream.write(
+        `  <url>
+    <loc>https://windycityherald.com/authors/${author.replace(".json", "")}</loc>
+    <lastmod>${buildDateString}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>\n`,
+      );
     });
 });
 
 // copying static files
-fs.cpSync(path.join(__dirname, 'public'), path.join(__dirname, 'dist'), { recursive: true });
+fs.cpSync(path.join(__dirname, "public"), path.join(__dirname, "dist"), {
+  recursive: true,
+});
 
 // json file with all article metadata
-fs.mkdirSync(path.join(__dirname, 'dist', 'data'), { recursive: true });
-fs.writeFileSync(path.join(__dirname, 'dist', 'data', 'articles.js'), `const articles = ${JSON.stringify(getAllArticles().map((article) => {
-  delete article.html;
-  return article;
-}))}`);
+fs.mkdirSync(path.join(__dirname, "dist", "data"), { recursive: true });
+fs.writeFileSync(
+  path.join(__dirname, "dist", "data", "articles.js"),
+  `const articles = ${JSON.stringify(
+    getAllArticles().map((article) => {
+      delete article.html;
+      return article;
+    }),
+  )}`,
+);

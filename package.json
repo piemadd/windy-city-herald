@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node build.js",
+    "build": "node build.js && echo \"</urlset>\" >> ./dist/sitemap.xml",
     "serve": "http-server dist -p 3000"
   },
   "keywords": [],
