@@ -11,8 +11,7 @@ imageAlt:
 imageCredit:
 ---
 
-Welcome to the Windy City Herald! This is a satirical newspaper based out of
-Chicago and you're reading the first article, so I'll keep it short.
+Welcome to the Windy City Herald, the newest and greatest newspaper in Chicago! This is the first article, so I'll keep it short.
 <br/>
 If you find a bug on the site, have a suggestion, or comment, please send in an
 issue on the [github repo](https://github.com/piemadd/windy-city-herald). If you
